@@ -1,0 +1,11 @@
+/home/peter/git/aerospike/aerospike-counters/dotnet/bin/Debug/netcoreapp2.1/dotnet.deps.json
+/home/peter/git/aerospike/aerospike-counters/dotnet/bin/Debug/netcoreapp2.1/dotnet.runtimeconfig.json
+/home/peter/git/aerospike/aerospike-counters/dotnet/bin/Debug/netcoreapp2.1/dotnet.runtimeconfig.dev.json
+/home/peter/git/aerospike/aerospike-counters/dotnet/bin/Debug/netcoreapp2.1/dotnet.dll
+/home/peter/git/aerospike/aerospike-counters/dotnet/bin/Debug/netcoreapp2.1/dotnet.pdb
+/home/peter/git/aerospike/aerospike-counters/dotnet/obj/Debug/netcoreapp2.1/dotnet.csprojAssemblyReference.cache
+/home/peter/git/aerospike/aerospike-counters/dotnet/obj/Debug/netcoreapp2.1/dotnet.csproj.CoreCompileInputs.cache
+/home/peter/git/aerospike/aerospike-counters/dotnet/obj/Debug/netcoreapp2.1/dotnet.AssemblyInfoInputs.cache
+/home/peter/git/aerospike/aerospike-counters/dotnet/obj/Debug/netcoreapp2.1/dotnet.AssemblyInfo.cs
+/home/peter/git/aerospike/aerospike-counters/dotnet/obj/Debug/netcoreapp2.1/dotnet.dll
+/home/peter/git/aerospike/aerospike-counters/dotnet/obj/Debug/netcoreapp2.1/dotnet.pdb

@@ -50,7 +50,7 @@ public class SingleAtomicCounter {
      * @param secondBy Increment or decremt second counter by
      * @return
      */
-    public long incrementMultiple(String counterName, String firstCounter, long firstBy, String secondCounter, long secondBy){
+    public LongTuple incrementMultiple(String counterName, String firstCounter, long firstBy, String secondCounter, long secondBy){
 
         // Create a key
         Key recordKey = new Key(Constants.NAMESPACE, Constants.MULTI_SET, counterName);
