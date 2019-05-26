@@ -18,7 +18,7 @@ namespace dotnet
             AtomicCounter atomic = new AtomicCounter();
             long newValue = atomic.IncrementSingle("a-single-counter", 1);
             Console.WriteLine("- single Atomic value {0}", newValue);
-            Tuple<Int64, Int64> newValues = atomic.IncrementMultiple("multiple-counters", "first-counter", 1L, "second-counter", 1L);
+            Tuple<Int64, Int64> newValues = atomic.IncrementMultiple("multiple-counters", "first-counter", 7L, "second-counter", 1L);
             Console.WriteLine("- single Atomic value {0}, {0}", newValues.Item1, newValues.Item2);
         }
 

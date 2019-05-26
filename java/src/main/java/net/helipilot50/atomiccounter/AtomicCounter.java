@@ -6,13 +6,21 @@ import com.aerospike.client.Key;
 import com.aerospike.client.Record;
 import com.aerospike.client.Operation;
 
+import net.helipilot50.atomiccounter.Constants;
+
 /**
- * Hello world!
+ * Acomic Counters in Aerospike
  *
  */
-public class SingleAtomicCounter {
+public class AtomicCounter {
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        System.out.println("Aerospike counters");
+        AtomicCounter atomic = new AtomicCounter();
+        long newValue = atomic.incrementSingle("a-single-counter", 1);
+        System.out.println(String.format("- One Atomic value %d", newValue));
+        LongTuple newValues = atomic.incrementMultiple("multiple-counters", "first-counter", 1L, "second-counter", 7L);
+        System.out.println(String.format("- Two Atomic values %d, %d", newValues.left, newValues.right));
     }
 
     public AerospikeClient asClient;
@@ -34,16 +42,18 @@ public class SingleAtomicCounter {
         Key recordKey = new Key(Constants.NAMESPACE, Constants.SINGLE_SET, counterName);
 
         // Increment operation
-        Bin incrementCounter = new Bin(Constants.COUNTER_BIN, by);
+        Bin incrementCounter = new Bin(Constants.SINGLE_COUNTER_BIN, by);
 
         // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
-        Record record = asClient.operate(null, recordKey, Operation.add(incrementCounter), Operation.get(Constants.COUNTER_BIN));
+        Record record = asClient.operate(null, recordKey, 
+                            Operation.add(incrementCounter), 
+                            Operation.get(Constants.SINGLE_COUNTER_BIN));
 
-        return record.getLong(Constants.COUNTER_BIN);
+        return record.getLong(Constants.SINGLE_COUNTER_BIN);
     }
     /**
      * Increment, or decrement, atomically two counters in the same record
-     * @param counterName the key for the counter record
+     * @param counterName the key for the counter recordd
      * @param firstCounter First counter name
      * @param firstBy Increment or decremt first counter by
      * @param secondCounter Second counter name
@@ -60,7 +70,11 @@ public class SingleAtomicCounter {
         Bin incrementCounter2 = new Bin(secondCounter, secondBy);
 
         // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
-        Record record = asClient.operate(null, recordKey, Operation.add(incrementCounter1), Operation.add(incrementCounter2), Operation.get(firstCounter), Operation.get(firstCounter));
+        Record record = asClient.operate(null, recordKey, 
+                                Operation.add(incrementCounter1), 
+                                Operation.add(incrementCounter2), 
+                                Operation.get(firstCounter), 
+                                Operation.get(secondCounter));
         return new LongTuple(record.getLong(firstCounter), record.getLong(secondCounter));
     }
 
@@ -77,7 +91,7 @@ public class SingleAtomicCounter {
         public long right;
         public LongTuple(long left, long right){
             this.left = left;
-            this.rignt = rignt;
+            this.right = right;
         }
     }
 }
