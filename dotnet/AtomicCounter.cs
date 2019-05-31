@@ -19,7 +19,7 @@ namespace dotnet
             long newValue = atomic.IncrementSingle("a-single-counter", 1);
             Console.WriteLine("- single Atomic value {0}", newValue);
             Tuple<Int64, Int64> newValues = atomic.IncrementMultiple("multiple-counters", "first-counter", 7L, "second-counter", 1L);
-            Console.WriteLine("- single Atomic value {0}, {0}", newValues.Item1, newValues.Item2);
+            Console.WriteLine("- Two Atomic values {0}, {1}", newValues.Item1, newValues.Item2);
         }
 
         public AtomicCounter()
@@ -52,7 +52,7 @@ namespace dotnet
             Bin incrementCounter2 = new Bin(secondCounter, secondBy);
 
             // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
-            Record record = asClient.Operate(null, recordKey, Operation.Add(incrementCounter1), Operation.Add(incrementCounter2), Operation.Get(firstCounter), Operation.Get(firstCounter));
+            Record record = asClient.Operate(null, recordKey, Operation.Add(incrementCounter1), Operation.Add(incrementCounter2), Operation.Get(firstCounter), Operation.Get(secondCounter));
             return Tuple.Create<Int64, Int64>(record.GetLong(firstCounter), record.GetLong(secondCounter));
         }
     }
