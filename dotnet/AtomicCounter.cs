@@ -55,5 +55,9 @@ namespace dotnet
             Record record = asClient.Operate(null, recordKey, Operation.Add(incrementCounter1), Operation.Add(incrementCounter2), Operation.Get(firstCounter), Operation.Get(secondCounter));
             return Tuple.Create<Int64, Int64>(record.GetLong(firstCounter), record.GetLong(secondCounter));
         }
+
+        ~AtomicCounter(){
+            this.asClient.Close();
+        }
     }
 }

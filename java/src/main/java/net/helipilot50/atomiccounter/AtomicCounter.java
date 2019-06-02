@@ -78,9 +78,29 @@ public class AtomicCounter {
         return new LongTuple(record.getLong(firstCounter), record.getLong(secondCounter));
     }
 
+    public User incrementVisits(String userId, String name){
+
+        // Create a key
+        Key recordKey = new Key(Constants.NAMESPACE, Constants.RECORD_SET, userId);
+
+        // Increment operations
+        Bin nameBin = new Bin(Constants.NAME_BIN, name);
+        Bin visitBin = new Bin(Constants.VISIT_BIN, 1);
+
+        // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
+        Record record = asClient.operate(null, recordKey, 
+                                Operation.add(visitBin), 
+                                Operation.put(nameBin), 
+                                Operation.get(Constants.NAME_BIN), 
+                                Operation.get(Constants.VISIT_BIN));
+        return new User(userId, record.getString(Constants.NAME_BIN), record.getLong(Constants.VISIT_BIN));
+    }
+    /**
+     * close the Aerospike client on process termination
+     */
     protected void finalize() {
-        asClient.close();
-        asClient = null;
+        this.asClient.close();
+        this.asClient = null;
     }
 
     /**
