@@ -3,7 +3,7 @@ How to create atomic counters using [Aerospike](www.aerospike.com%)
 
 # Local aerospike datbase using docker
 ```bash
-sudo docker-compose up
+sudo docker-compose -f aerospike-single-docker-compose.yml up
 ```
 # Run Dotnet example
 ```bash
