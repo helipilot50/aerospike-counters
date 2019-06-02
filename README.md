@@ -1,4 +1,4 @@
-# Atomic Counters using Aerospike-counters (WORK IN PROGRESS)
+# Atomic Counters using Aerospike (WORK IN PROGRESS)
 How to create atomic counters using [Aerospike](www.aerospike.com%)
 
 # Local aerospike datbase using docker
