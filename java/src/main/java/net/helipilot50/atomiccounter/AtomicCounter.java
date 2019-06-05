@@ -28,6 +28,8 @@ public class AtomicCounter {
         System.out.println(String.format("- One Atomic value %d", newValue));
         LongTuple newValues = atomic.incrementMultiple("multiple-counters", "first-counter", 1L, "second-counter", 7L);
         System.out.println(String.format("- Two Atomic values %d, %d", newValues.left, newValues.right));
+        User user = atomic.incrementVisits("helipilot50", "Peter Milne");
+        System.out.println(String.format("- User: %s", user.toString()));
     }
 
     public AerospikeClient asClient;
@@ -46,17 +48,17 @@ public class AtomicCounter {
     public long incrementSingle(String counterName, long by){
 
         // Create a key
-        Key recordKey = new Key(Constants.NAMESPACE, Constants.SINGLE_SET, counterName);
+        Key recordKey = new Key(NAMESPACE, SINGLE_SET, counterName);
 
         // Increment operation
-        Bin incrementCounter = new Bin(Constants.SINGLE_COUNTER_BIN, by);
+        Bin incrementCounter = new Bin(SINGLE_COUNTER_BIN, by);
 
         // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
         Record record = asClient.operate(null, recordKey, 
                             Operation.add(incrementCounter), 
-                            Operation.get(Constants.SINGLE_COUNTER_BIN));
+                            Operation.get(SINGLE_COUNTER_BIN));
 
-        return record.getLong(Constants.SINGLE_COUNTER_BIN);
+        return record.getLong(SINGLE_COUNTER_BIN);
     }
     /**
      * Increment, or decrement, atomically two counters in the same record
@@ -70,7 +72,7 @@ public class AtomicCounter {
     public LongTuple incrementMultiple(String counterName, String firstCounter, long firstBy, String secondCounter, long secondBy){
 
         // Create a key
-        Key recordKey = new Key(Constants.NAMESPACE, Constants.MULTI_SET, counterName);
+        Key recordKey = new Key(NAMESPACE, MULTI_SET, counterName);
 
         // Increment operations
         Bin incrementCounter1 = new Bin(firstCounter, firstBy);
@@ -88,19 +90,19 @@ public class AtomicCounter {
     public User incrementVisits(String userId, String name){
 
         // Create a key
-        Key recordKey = new Key(Constants.NAMESPACE, Constants.RECORD_SET, userId);
+        Key recordKey = new Key(NAMESPACE, RECORD_SET, userId);
 
         // Increment operations
-        Bin nameBin = new Bin(Constants.NAME_BIN, name);
-        Bin visitBin = new Bin(Constants.VISIT_BIN, 1);
+        Bin nameBin = new Bin(NAME_BIN, name);
+        Bin visitBin = new Bin(VISIT_BIN, 1);
 
         // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
         Record record = asClient.operate(null, recordKey, 
                                 Operation.add(visitBin), 
                                 Operation.put(nameBin), 
-                                Operation.get(Constants.NAME_BIN), 
-                                Operation.get(Constants.VISIT_BIN));
-        return new User(userId, record.getString(Constants.NAME_BIN), record.getLong(Constants.VISIT_BIN));
+                                Operation.get(NAME_BIN), 
+                                Operation.get(VISIT_BIN));
+        return new User(userId, record.getString(NAME_BIN), record.getLong(VISIT_BIN));
     }
     /**
      * close the Aerospike client on process termination

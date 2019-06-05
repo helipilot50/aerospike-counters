@@ -100,7 +100,7 @@ namespace dotnet
 
         public override String ToString()
         {
-            return String.Format("{id: %s, name: %s, visitCount: %d}", this.id, this.name, this.visitCount);
+            return String.Format("id: {0}, name: {1}, visitCount: {2}", this.id, this.name, this.visitCount);
         }
 
     }
