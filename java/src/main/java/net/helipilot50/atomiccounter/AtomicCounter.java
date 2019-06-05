@@ -6,13 +6,20 @@ import com.aerospike.client.Key;
 import com.aerospike.client.Record;
 import com.aerospike.client.Operation;
 
-import net.helipilot50.atomiccounter.Constants;
 
 /**
  * Acomic Counters in Aerospike
  *
  */
 public class AtomicCounter {
+    public final String NAMESPACE = "test";
+    public final String SINGLE_SET = "single-counter";
+    public final String MULTI_SET = "multi-counter";
+    public final String RECORD_SET = "record-with-counter";
+    public final String NAME_BIN = "name-bin";
+    public final String VISIT_BIN = "visit-bin";
+    public final String SINGLE_COUNTER_BIN = "counter-bin";
+
     public static void main(String[] args) {
         System.out.println("Hello World!");
         System.out.println("Aerospike counters");
@@ -113,5 +120,23 @@ public class AtomicCounter {
             this.left = left;
             this.right = right;
         }
+    }
+
+    public class User {
+        String id;
+        String name;
+        Long visitCount;
+    
+        public User(String id, String name, Long visitCount){
+            this.name = name;
+            this.id = id;
+            this.visitCount = visitCount;
+        }
+    
+        @Override
+        public String toString() {
+            return String.format("{id: %s, name: %s, visitCount: %d}", this.id, this.name, this.visitCount);
+        }
+    
     }
 }
