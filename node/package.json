@@ -1,0 +1,35 @@
+{
+  "name": "atomic-counters",
+  "version": "1.0.0",
+  "description": "Atomic counters using Aerospike",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helipilot50/aerospike-counters.git"
+  },
+  "keywords": [
+    "Aerospike",
+    "Counter"
+  ],
+  "author": "Peter Milne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helipilot50/aerospike-counters/issues"
+  },
+  "homepage": "https://github.com/helipilot50/aerospike-counters#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0"
+  },
+  "dependencies": {
+    "aerospike": "^3.11.0",
+    "babel-cli": "^6.26.0"
+  }
+}

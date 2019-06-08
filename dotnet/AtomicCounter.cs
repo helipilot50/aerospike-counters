@@ -34,13 +34,10 @@ namespace dotnet
         public long IncrementSingle(string counterName, long by)
         {
 
-            // Create a key
             Key recordKey = new Key(NAMESPACE, SINGLE_SET, counterName);
 
-            // Increment operation
             Bin incrementCounter = new Bin(SINGLE_COUNTER_BIN, by);
 
-            // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
             Record record = asClient.Operate(null, recordKey, Operation.Add(incrementCounter), Operation.Get(SINGLE_COUNTER_BIN));
 
             return record.GetLong(SINGLE_COUNTER_BIN);
@@ -49,28 +46,22 @@ namespace dotnet
         public Tuple<Int64, Int64> IncrementMultiple(string counterName, string firstCounter, long firstBy, string secondCounter, long secondBy)
         {
 
-            // Create a key
             Key recordKey = new Key(NAMESPACE, MULTI_SET, counterName);
 
-            // Increment operations
             Bin incrementCounter1 = new Bin(firstCounter, firstBy);
             Bin incrementCounter2 = new Bin(secondCounter, secondBy);
 
-            // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
             Record record = asClient.Operate(null, recordKey, Operation.Add(incrementCounter1), Operation.Add(incrementCounter2), Operation.Get(firstCounter), Operation.Get(secondCounter));
             return Tuple.Create<Int64, Int64>(record.GetLong(firstCounter), record.GetLong(secondCounter));
         }
         public User IncrementVisits(String userId, String name)
         {
 
-            // Create a key
             Key recordKey = new Key(NAMESPACE, RECORD_SET, userId);
 
-            // Increment operations
             Bin nameBin = new Bin(NAME_BIN, name);
             Bin visitBin = new Bin(VISIT_BIN, 1);
 
-            // https://www.aerospike.com/docs/client/java/usage/kvs/multiops.html#operation-specification
             Record record = asClient.Operate(null, recordKey,
                                     Operation.Add(visitBin),
                                     Operation.Put(nameBin),
