@@ -13,7 +13,7 @@ git clone https://github.com/helipilot50/aerospike-counters.git
 ```bash
 sudo docker-compose -f aerospike-single-docker-compose.yml up
 ```
-# Run Dotnet example
+# Run C# example
 ```bash
 dotnet build
 dotnet run
@@ -24,7 +24,7 @@ dotnet run
 mvn build
 mvn exec:java
 ```
-# Run Node example
+# Run JavaScript/Node example
 ```bash
 npm install
 npm start
