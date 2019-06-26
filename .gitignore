@@ -2,3 +2,5 @@ dotnet/bin
 dotnet/obj
 java/target
 rust/atomic-counters/target
+counters/.idea
+java/.idea
