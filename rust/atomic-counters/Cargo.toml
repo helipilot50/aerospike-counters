@@ -1,8 +1,0 @@
-[package]
-name = "atomic-counters"
-version = "0.1.0"
-authors = ["Peter Milne <Peter.Milne@adform.com>"]
-edition = "2018"
-
-[dependencies]
-aerospike = "0.1.0"
