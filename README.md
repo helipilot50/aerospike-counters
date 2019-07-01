@@ -1,4 +1,4 @@
-# Atomic Counters using Aerospike (WORK IN PROGRESS)
+# Atomic Counters using Aerospike
 How to create atomic counters using [Aerospike](www.aerospike.com)
 Read the full article at [Medium](https://link.medium.com/xo6luzGLUX)
 # Companion Code
