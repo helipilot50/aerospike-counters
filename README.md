@@ -9,7 +9,7 @@ Clone the repository using:
 git clone https://github.com/helipilot50/aerospike-counters.git
 ```
 
-# Local aerospike database using docker
+# Local Aerospike database using docker
 ```bash
 sudo docker-compose -f aerospike-single-docker-compose.yml up
 ```
